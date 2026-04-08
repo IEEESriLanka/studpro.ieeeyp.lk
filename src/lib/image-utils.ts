@@ -22,22 +22,22 @@ export function getSafeImageUrl(imagePath: string): string {
 export function getSafeTeamImageUrl(imagePath: string): string {
 	// List of known team images that exist in the public directory
 	const knownTeamImages = [
-		"/images/team/vismini.png",
 		"/images/team/chamod.png",
-		"/images/team/dayantha.png",
-		"/images/team/wishma.png",
+		"/images/team/yasas.png",
+		"/images/team/pamuda.png",
 		"/images/team/dilmith.png",
-		"/images/team/minuri.png",
-		"/images/team/dilshani.png",
+		"/images/team/oneli.png",
+		"/images/team/ovindu.png",
 		"/images/team/santhush.png",
-		"/images/team/ashwinie.png",
 		"/images/team/sandali.png",
-		"/images/team/tharusha.png",
-		"/images/team/dasunika.png",
-		"/images/team/pesandu.png",
-		"/images/team/sajitha.png",
-		"/images/team/dasun.png",
-		"/images/team/gihan.png",
+		"/images/team/manusha.png",
+		"/images/team/kaveen.png",
+		"/images/team/harini.png",
+		"/images/team/navodhya.png",
+		"/images/team/charunda.png",
+		"/images/team/kavishka.png",
+		"/images/team/shageeshan.png",
+		"/images/team/pawara.png",
 	];
 
 	// If the image path is in the list of known team images, return it; otherwise, return a fallback

@@ -43,5 +43,17 @@
     "tailwindcss": "^4.1.8",
     "tw-animate-css": "^1.3.3",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IEEESriLanka/studpro.ieeeyp.lk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IEEESriLanka/studpro.ieeeyp.lk/issues"
+  },
+  "homepage": "https://github.com/IEEESriLanka/studpro.ieeeyp.lk#readme"
 }
