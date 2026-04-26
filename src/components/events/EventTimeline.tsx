@@ -41,9 +41,9 @@ export function EventTimeline({ events, selectedYear }: EventTimelineProps) {
 					<span className="text-primary">Stud</span>
 					<span className="text-secondary me-4">
 						Pro{" "}
-						{sortedEvents.map(
-							(studproVersion) => studproVersion.version.split("o")[1],
-						)}
+						{sortedEvents
+							.map((studproVersion) => studproVersion.version.split("o")[1].trim())
+							.join(", ")}
 					</span>
 					EVENTS
 				</h1>
@@ -88,8 +88,8 @@ export function EventTimeline({ events, selectedYear }: EventTimelineProps) {
 											{/* Events in this series */}
 											<div className="ml-8">
 												<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-													{series.events.map((session, sessionIndex) => (
-														<div key={sessionIndex} className="group">
+													{series.events.map((session) => (
+														<div key={session.title} className="group">
 															<EventCard
 																session={session}
 																version={studProVersion.version}

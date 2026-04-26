@@ -67,7 +67,7 @@ export const Hero = () => {
                     onEnterBack: () => {
                         if (mainRef.current) {
                             mainRef.current.style.transition = "opacity 0.5s ease";
-                            mainRef.current.style.opacity = "100";
+                            mainRef.current.style.opacity = "1";
                         }
                     },
                 },

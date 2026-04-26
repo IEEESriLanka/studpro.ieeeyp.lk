@@ -17,7 +17,7 @@ export const WhatWeDoCard = ({ title, description, image }: WhatWeDoItem) => {
 							{title}
 						</h3>
 						<p className="text-gray-600 leading-relaxed">{description}</p>
-						<div className="w-full h-200px overflow-hidden my-2">
+						<div className="w-full h-[200px] overflow-hidden my-2">
 							<Image
 								src={image}
 								alt={title}
