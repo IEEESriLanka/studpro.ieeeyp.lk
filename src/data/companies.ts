@@ -302,6 +302,86 @@ export const companies: Company[] = [
 		name: "Inivos",
 		logo: "inivos.jpg",
 	},
+	{
+		id: "cms",
+		name: "CMS",
+		logo: "cms.png",
+	},
+	{
+		id: "cube",
+		name: "CUBE",
+		logo: "cube.png",
+	},
+	{
+		id: "econsulate",
+		name: "Econsulate",
+		logo: "econsulate.png",
+	},
+	{
+		id: "pick_me",
+		name: "Pick Me",
+		logo: "pick_me.png",
+	},
+	{
+		id: "nestle",
+		name: "Nestle",
+		logo: "nestle.png",
+	},
+	{
+		id:"express_jobs",
+		name: "Express Jobs",
+		logo: "express_jobs.png",
+	},
+	{
+		id:"mint_hrm",
+		name: "Mint HRM",
+		logo: "mint_hrm.png",
+	},
+	{
+		id: "octave",
+		name: "Octave",
+		logo: "octave.png",
+	},
+	{
+		id: "north_sails",
+		name: "North Sails",
+		logo: "north_sails.png",
+	},
+	{
+		id: "sentry_labs",
+		name: "Sentry Labs",
+		logo: "sentry_labs.png",
+	},
+	{
+		id:"gtn",
+		name: "GTN",
+		logo: "gtn.png",
+	},
+	{
+		id:"hemas",
+		name: "Hemas",
+		logo: "hemas.jpeg",
+	},
+	{
+		id: "dpl",
+		name: "DPL",
+		logo: "dpl.jpeg",
+	},
+	{
+		id: "heyleys",
+		name: "Heyleys",
+		logo: "heyleys.jpeg",
+	},
+	{
+		id: "accelr",
+		name: "Accelr",
+		logo: "accelr.jpeg",
+	},
+	{
+		id:"satva",
+		name: "Satva",
+		logo: "satva.jpeg",
+	}
 ];
 
 export const companyMap: Record<string, Company> = Object.fromEntries(
