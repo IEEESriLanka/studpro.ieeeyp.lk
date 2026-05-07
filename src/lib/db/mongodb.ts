@@ -61,7 +61,3 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
 	global.mongooseConnection.conn = await global.mongooseConnection.promise;
 	return global.mongooseConnection.conn;
 }
-
-// Export models for convenience
-export * from "../../../types/models/events";
-export * from "../../../types/models/partnerCompany";
