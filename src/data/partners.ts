@@ -291,6 +291,79 @@ export const partnersByYear: PartnersByYear[] = [
 				partnerLevel: "Industry",
 			},
 		],
+	}, {
+		year: 2026,
+		version: "StudPro 9.0",
+		partners: [
+			{
+				companyId: "vsis",
+				partnerLevel: "Industry",
+			}, {
+				companyId: "slt_mobitel",
+			}, {
+				companyId: "ifs_sri_lanka",
+				partnerLevel: "Gold",
+			},{
+				companyId: "effective_solutions",
+				partnerLevel: "Bronze",
+			},{
+				companyId: "john_keells_it",
+			},{
+				companyId: "nagarro",
+				partnerLevel: "Industry",
+			},{
+				companyId: "virtusa",
+				partnerLevel: "Industry",
+			},{
+				companyId: "hayleys",
+			},
+			{
+				companyId: "cms",
+			},
+			{
+				companyId: "econsulate",
+			},
+			{
+				companyId: "pick_me",
+			},
+			{
+				companyId: "nestle",
+			},
+			{
+				companyId: "express_jobs",
+			},
+			{
+				companyId: "mint_hrm",
+			},
+			{
+				companyId: "octave",
+			},
+			{
+				companyId: "north_sails",
+			},
+			{
+				companyId: "sentry_labs",
+			},
+			{
+				companyId: "gtn",
+			},
+			{
+				companyId: "hemas",
+			},
+			{
+				companyId: "dpl",
+			},
+			{
+				companyId:"heyleys"
+			},
+			{
+				companyId: "accelr",
+			},
+			{
+				companyId: "satva",
+			}
+
+		],
 	},
 ];
 
