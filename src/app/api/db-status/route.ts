@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { connectToDatabase, StudPro, PartnerCompany } from "@/lib/db/mongodb";
+import mongoose from "mongoose";
+import { connectToDatabase } from "@/lib/db/mongodb";
 
 export async function GET(req: NextRequest) {
 	try {
 		// Connect to the database
 		await connectToDatabase();
 
-		// Perform a simple database check to test the connection
-		const isConnected = StudPro.db.readyState === 1;
+		// Check the Mongoose connection readyState (1 = connected)
+		const isConnected = mongoose.connection.readyState === 1;
 
 		return NextResponse.json({
 			status: "success",
