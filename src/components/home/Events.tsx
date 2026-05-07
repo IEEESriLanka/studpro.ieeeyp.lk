@@ -4,7 +4,12 @@ import { events } from "@/data/events";
 import { Event, StudProVersion } from "@/data/events";
 import { useState, useEffect } from "react";
 import { EventCard } from "@/components/events/EventCard";
-import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import {
+	Carousel,
+	CarouselApi,
+	CarouselContent,
+	CarouselItem,
+} from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -70,8 +75,10 @@ export const Events = () => {
 								Latest Events
 							</h2>
 							<p className="text-base md:text-lg mx-auto text-gray-600 px-2">
-								Explore our most recent events where innovation meets inspiration. <br className="hidden md:block" />
-								Catch up with what you missed and stay tuned for more exciting opportunities.
+								Explore our most recent events where innovation meets
+								inspiration. <br className="hidden md:block" />
+								Catch up with what you missed and stay tuned for more exciting
+								opportunities.
 							</p>
 						</div>
 						{/* Mobile Carousel */}
@@ -92,7 +99,10 @@ export const Events = () => {
 							>
 								<CarouselContent className="-ml-2">
 									{latestEvents.map((event, idx) => (
-										<CarouselItem key={`mobile-latest-${idx}`} className="flex justify-center">
+										<CarouselItem
+											key={`mobile-latest-${idx}`}
+											className="flex justify-center"
+										>
 											<EventCard session={event} version={event.versionTitle} />
 										</CarouselItem>
 									))}

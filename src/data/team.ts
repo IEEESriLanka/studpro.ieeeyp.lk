@@ -45,7 +45,7 @@ export const teamMembers: TeamMember[] = [
 		name: "Minuri Senara",
 		role: "Vice Chairperson - Public Visibility",
 		email: "mailto:minurisenara@gmail.com",
-		contactNo: "+94713775404"
+		contactNo: "+94713775404",
 	},
 	{
 		name: "Dilshani Ekanayaka",
@@ -88,7 +88,7 @@ export const teamMembers: TeamMember[] = [
 		role: "Member Coordinator",
 		linkedIn: "https://www.linkedin.com/in/pesandu-de-alwis-43ab25282",
 		email: "mailto:pesandu_de_alwis@ieee.org",
-		contactNo: "+94715604949"
+		contactNo: "+94715604949",
 	},
 	{
 		name: "Sajitha Sulakshana",

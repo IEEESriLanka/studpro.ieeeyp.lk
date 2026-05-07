@@ -45,16 +45,10 @@ export const Header = () => {
 
 				{/* Desktop menu */}
 				<div className="hidden md:flex gap-4 lg:gap-8">
-					<Link
-						href="/"
-						className="hover:text-primary transition-colors"
-					>
+					<Link href="/" className="hover:text-primary transition-colors">
 						Home
 					</Link>
-					<Link
-						href="/events"
-						className="hover:text-primary transition-colors"
-					>
+					<Link href="/events" className="hover:text-primary transition-colors">
 						Events
 					</Link>
 					<Link
@@ -81,11 +75,17 @@ export const Header = () => {
 				<div className="md:hidden">
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<button className="flex items-center justify-center focus:outline-none" aria-label="Toggle menu">
+							<button
+								className="flex items-center justify-center focus:outline-none"
+								aria-label="Toggle menu"
+							>
 								<Menu className="w-5 h-5" />
 							</button>
 						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end" className="w-56 mt-2 bg-white/60 backdrop-blur-sm border-none">
+						<DropdownMenuContent
+							align="end"
+							className="w-56 mt-2 bg-white/60 backdrop-blur-sm border-none"
+						>
 							<DropdownMenuItem asChild>
 								<Link href="/" className="w-full cursor-pointer">
 									Home

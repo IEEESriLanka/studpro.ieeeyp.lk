@@ -105,7 +105,8 @@ export const Footer = () => (
 				<FooterLinksSection title="IEEE Links" links={ieeeLinks} />
 				<div className="flex flex-col gap-2">
 					<h3 className="font-bold uppercase">Contact Us</h3>
-					<p className="">Tel:{" "}
+					<p className="">
+						Tel:{" "}
 						<Link
 							className="hover:text-primary transition-colors"
 							href="tel:+94769409925"
