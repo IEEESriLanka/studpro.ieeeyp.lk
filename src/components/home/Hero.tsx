@@ -14,7 +14,7 @@ export const Hero = () => {
 			"/images/hero/hero-bg-1.jpg",
 			"/images/hero/hero-bg-2.jpg",
 			"/images/hero/hero-bg-3.jpg",
-			"/images/hero/hero-bg-4.jpg",
+			// "/images/hero/hero-bg-4.jpg",
 		],
 		[],
 	); // Add more if needed
