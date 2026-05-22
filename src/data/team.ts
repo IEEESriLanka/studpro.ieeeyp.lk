@@ -45,7 +45,7 @@ export const teamMembers: TeamMember[] = [
 		name: "Santhush Kumuditha",
 		role: "Vice Chairperson - Public Visibility",
 		email: "mailto:santhush.munasinghe@ieee.org",
-		contactNo: "+94712506252"
+		contactNo: "+94712506252",
 	},
 	{
 		name: "Kaveen gunarathne",
@@ -88,7 +88,7 @@ export const teamMembers: TeamMember[] = [
 		role: "Member Coordinator",
 		linkedIn: "https://www.linkedin.com/in/shageeshan/",
 		email: "mailto:shageejoxtyn@gmail.com",
-		contactNo: "+94771089061"
+		contactNo: "+94771089061",
 	},
 	{
 		name: "Manusha Jayasinghe",

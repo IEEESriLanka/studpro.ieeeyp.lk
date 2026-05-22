@@ -1,0 +1,16 @@
+echo "🧼 Running Biome format..."
+npm run format-write
+
+echo "📦 Re-adding changes after formatting..."
+git add .
+
+echo "🔨 Running build..."
+npm run build
+
+# Optional: Check if build passed
+if [ $? -ne 0 ]; then
+  echo "❌ Build failed. Commit aborted!"
+  exit 1
+fi
+
+echo "✅ All checks passed! Ready to commit."

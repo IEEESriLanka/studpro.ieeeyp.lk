@@ -291,30 +291,38 @@ export const partnersByYear: PartnersByYear[] = [
 				partnerLevel: "Industry",
 			},
 		],
-	}, {
+	},
+	{
 		year: 2026,
 		version: "StudPro 9.0",
 		partners: [
 			{
 				companyId: "vsis",
 				partnerLevel: "Industry",
-			}, {
+			},
+			{
 				companyId: "slt_mobitel",
-			}, {
+			},
+			{
 				companyId: "ifs_sri_lanka",
 				partnerLevel: "Gold",
-			},{
+			},
+			{
 				companyId: "effective_solutions",
 				partnerLevel: "Bronze",
-			},{
+			},
+			{
 				companyId: "john_keells_it",
-			},{
+			},
+			{
 				companyId: "nagarro",
 				partnerLevel: "Industry",
-			},{
+			},
+			{
 				companyId: "virtusa",
 				partnerLevel: "Industry",
-			},{
+			},
+			{
 				companyId: "hayleys",
 			},
 			{
@@ -354,15 +362,14 @@ export const partnersByYear: PartnersByYear[] = [
 				companyId: "dpl",
 			},
 			{
-				companyId:"heyleys"
+				companyId: "heyleys",
 			},
 			{
 				companyId: "accelr",
 			},
 			{
 				companyId: "satva",
-			}
-
+			},
 		],
 	},
 ];

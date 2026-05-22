@@ -1082,7 +1082,19 @@ export const events: StudProVersion[] = [
 						topic: "",
 						description:
 							"ProFile 2025 is a dynamic career development initiative designed to bridge the gap between academic learning and industry expectations. The program provides a centralized platform where students, fresh graduates, and job seekers can gain direct exposure to real-world career pathways, industry insights, and professional development opportunities. Through a series of carefully curated sessions, workshops, and industry interactions, participants are equipped with essential skills required to thrive in today’s competitive job market. ProFile 2025 also creates valuable networking opportunities, allowing participants to connect with professionals, mentors, and like-minded peers. One of the key highlights of the program is its focus on inclusivity, ensuring equal access to career guidance and opportunities for individuals from diverse backgrounds. Whether you are just starting your career journey or aiming to elevate your professional profile, ProFile 2025 serves as a launchpad to help you move forward with confidence.",
-						images: ["/images/events/9.0/Profile-2025-Phase-1-1.jpg", "/images/events/9.0/Profile-2025-Phase-1-2.jpg", "/images/events/9.0/Profile-2025-Phase-1-3.jpg", "/images/events/9.0/Profile-2025-Phase-1-4.jpg", "/images/events/9.0/Profile-2025-Phase-1-5.jpg", "/images/events/9.0/Profile-2025-Phase-1-6.jpg", "/images/events/9.0/Profile-2025-Phase-1-7.jpg", "/images/events/9.0/Profile-2025-Phase-1-8.jpg", "/images/events/9.0/Profile-2025-Phase-1-9.jpg", "/images/events/9.0/Profile-2025-Phase-1-10.jpg", "/images/events/9.0/Profile-2025-Phase-1-11.jpg"],
+						images: [
+							"/images/events/9.0/Profile-2025-Phase-1-1.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-2.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-3.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-4.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-5.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-6.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-7.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-8.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-9.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-10.jpg",
+							"/images/events/9.0/Profile-2025-Phase-1-11.jpg",
+						],
 						speaker: {
 							name: "Trace Expert City, Colombo",
 							title: "",
@@ -1090,7 +1102,6 @@ export const events: StudProVersion[] = [
 						},
 						venue: "Trace Expert City, Colombo",
 					},
-
 				],
 			},
 			{
@@ -1105,14 +1116,22 @@ export const events: StudProVersion[] = [
 						topic: "",
 						description:
 							"Profile Career Day is a dynamic platform designed to connect undergraduates with industry-leading companies and career opportunities. Organized under StudPro 9.0, the event brings together students from diverse fields such as software engineering, IT, AI, management, and engineering to engage directly with professionals. Participants gain valuable exposure through HR and technical interviews, CV evaluations, and networking sessions. With over 400 interviews conducted by 20+ companies, the event focuses on enhancing employability skills and preparing students for real-world recruitment processes. Profile Career Day serves as a bridge between academia and industry, empowering students to take confident steps toward their professional careers.",
-						images: ["/images/events/9.0/career-day-1-1.jpg", "/images/events/9.0/career-day-1-2.jpg", "/images/events/9.0/career-day-1-3.jpg", "/images/events/9.0/career-day-1-4.jpg", "/images/events/9.0/career-day-1-5.jpg", "/images/events/9.0/career-day-1-6.jpg", "/images/events/9.0/career-day-1-7.jpg"],
+						images: [
+							"/images/events/9.0/career-day-1-1.jpg",
+							"/images/events/9.0/career-day-1-2.jpg",
+							"/images/events/9.0/career-day-1-3.jpg",
+							"/images/events/9.0/career-day-1-4.jpg",
+							"/images/events/9.0/career-day-1-5.jpg",
+							"/images/events/9.0/career-day-1-6.jpg",
+							"/images/events/9.0/career-day-1-7.jpg",
+						],
 						speaker: {
 							name: "Royal MAS Arena, Colombo",
 							title: "",
 							company: "",
 						},
 						venue: "Royal MAS Arena, Colombo",
-					}
+					},
 				],
 			},
 			{
@@ -1127,14 +1146,22 @@ export const events: StudProVersion[] = [
 						topic: "",
 						description:
 							"Young Protégé 2025, powered by StudPro, IEEE Young Professionals Sri Lanka (YPSL), IEEE Students, and IEEE Elevate, returns this year with an even broader scope, welcoming participants from various different backgrounds. The program is designed to support students and young professionals in building strong professional foundations through structured mentorship. Through personalized guidance from industry experts, participants will gain valuable career insights, enhance their professional profiles, and develop essential skills required for real-world success. The program combines mentorship, real-world assignments, research projects, and continuous feedback to help participants explore career paths, improve decision-making, and strengthen their personal brand.",
-						images: ["/images/events/9.0/young-protege-2025-1-1.jpg", "/images/events/9.0/young-protege-2025-1-2.jpg", "/images/events/9.0/young-protege-2025-1-3.jpg", "/images/events/9.0/young-protege-2025-1-4.jpg", "/images/events/9.0/young-protege-2025-1-5.jpg", "/images/events/9.0/young-protege-2025-1-6.jpg", "/images/events/9.0/young-protege-2025-1-7.jpg"],
+						images: [
+							"/images/events/9.0/young-protege-2025-1-1.jpg",
+							"/images/events/9.0/young-protege-2025-1-2.jpg",
+							"/images/events/9.0/young-protege-2025-1-3.jpg",
+							"/images/events/9.0/young-protege-2025-1-4.jpg",
+							"/images/events/9.0/young-protege-2025-1-5.jpg",
+							"/images/events/9.0/young-protege-2025-1-6.jpg",
+							"/images/events/9.0/young-protege-2025-1-7.jpg",
+						],
 						speaker: {
 							name: "KickOff Session - IIT , Colombo ",
 							title: "",
 							company: "",
 						},
 						venue: "KickOff Session - IIT , Colombo ",
-					}
+					},
 				],
 			},
 		],

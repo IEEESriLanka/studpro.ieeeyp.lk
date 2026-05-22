@@ -33,13 +33,13 @@ export function EventCard({ session, version }: EventCardProps) {
 		>
 			{session.images && session.images.length > 0 && (
 				<div className="w-full h-[350px] relative overflow-hidden">
-						<Image
-							src={session.images[0]}
-							alt={session.title}
-							width={350}
-							height={200}
-							className="object-cover w-full h-full"
-						/>
+					<Image
+						src={session.images[0]}
+						alt={session.title}
+						width={350}
+						height={200}
+						className="object-cover w-full h-full"
+					/>
 				</div>
 			)}
 			<CardContent className="px-6">

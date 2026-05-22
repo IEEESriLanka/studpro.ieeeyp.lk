@@ -328,12 +328,12 @@ export const companies: Company[] = [
 		logo: "nestle.png",
 	},
 	{
-		id:"express_jobs",
+		id: "express_jobs",
 		name: "Express Jobs",
 		logo: "express_jobs.png",
 	},
 	{
-		id:"mint_hrm",
+		id: "mint_hrm",
 		name: "Mint HRM",
 		logo: "mint_hrm.png",
 	},
@@ -353,12 +353,12 @@ export const companies: Company[] = [
 		logo: "sentry_labs.png",
 	},
 	{
-		id:"gtn",
+		id: "gtn",
 		name: "GTN",
 		logo: "gtn.png",
 	},
 	{
-		id:"hemas",
+		id: "hemas",
 		name: "Hemas",
 		logo: "hemas.jpeg",
 	},
@@ -378,10 +378,10 @@ export const companies: Company[] = [
 		logo: "accelr.jpeg",
 	},
 	{
-		id:"satva",
+		id: "satva",
 		name: "Satva",
 		logo: "satva.jpeg",
-	}
+	},
 ];
 
 export const companyMap: Record<string, Company> = Object.fromEntries(
