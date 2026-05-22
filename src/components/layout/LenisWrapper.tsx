@@ -15,7 +15,7 @@ export default function LenisWrapper({ children }: { children: ReactNode }) {
 	useEffect(() => {
 		const lenis = lenisRef.current?.lenis;
 		if (lenis) {
-			lenis?.on('scroll', ScrollTrigger.update);
+			lenis?.on("scroll", ScrollTrigger.update);
 		}
 
 		return () => {

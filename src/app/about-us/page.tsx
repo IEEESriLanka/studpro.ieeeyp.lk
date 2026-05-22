@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 export default function PartnersPage() {
-
 	const vssion =
 		"Our vision is to create a platform that connects students with opportunities, resources, and each other, fostering a community of growth and collaboration.";
 	const mission =
@@ -37,7 +36,10 @@ export default function PartnersPage() {
 						</Card>
 					</div>
 					<div id="team" className="mt-16">
-						<h1 className="text-3xl font-bold uppercase text-center sm:text-start"> Our Team </h1>
+						<h1 className="text-3xl font-bold uppercase text-center sm:text-start">
+							{" "}
+							Our Team{" "}
+						</h1>
 						<div className="flex flex-wrap justify-center items-center pt-8">
 							{teamMembers.map((member, index) => (
 								<TeamCard key={index} member={member} />

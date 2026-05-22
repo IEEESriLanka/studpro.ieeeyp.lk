@@ -24,7 +24,6 @@ export default function Home() {
 	const contactUsRef = useRef<HTMLDivElement>(null);
 
 	useLayoutEffect(() => {
-
 		const sections = [
 			{ ref: overviewRef, name: "Overview" },
 			{ ref: whatWeDoRef, name: "WhatWeDo" },
@@ -97,16 +96,16 @@ export default function Home() {
 			<div ref={whatWeDoRef} style={{ opacity: 0 }} data-bgcolor="#FFFFFF">
 				<WhatWeDo />
 			</div>
-			<div ref={eventsRef} style={{ opacity: 0 }}  data-bgcolor="#FFFFFF">
+			<div ref={eventsRef} style={{ opacity: 0 }} data-bgcolor="#FFFFFF">
 				<Events />
 			</div>
-			<div ref={statsRef} style={{ opacity: 0 }}  data-bgcolor="#EE7929">
+			<div ref={statsRef} style={{ opacity: 0 }} data-bgcolor="#EE7929">
 				<Stats />
 			</div>
-			<div ref={partnersRef} style={{ opacity: 0 }}  data-bgcolor="#FFFFFF">
+			<div ref={partnersRef} style={{ opacity: 0 }} data-bgcolor="#FFFFFF">
 				<Partners />
 			</div>
-			<div ref={contactUsRef} style={{ opacity: 0 }}  data-bgcolor="#065E86">
+			<div ref={contactUsRef} style={{ opacity: 0 }} data-bgcolor="#065E86">
 				<ContactUs />
 			</div>
 		</LenisWrapper>
