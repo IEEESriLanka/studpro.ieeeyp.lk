@@ -1,5 +1,6 @@
+"use client";
+
 import { StatCard } from "@/components/home/StatCard";
-import { events, StudProVersion } from "@/data/events";
 
 export interface StatsData {
 	type: string;
@@ -8,42 +9,62 @@ export interface StatsData {
 }
 
 export const Stats = () => {
-	// Get the current year and find the most recent version
-	const currentYear = new Date().getFullYear();
-	const previousYear = currentYear - 1;
-
-	// Find the version from the previous year, or use the last one if not found
-	const latestVersion: StudProVersion =
-		events.find((event) => event.year === previousYear) ||
-		events.reduce(
-			(latest, current) => (current.year > latest.year ? current : latest),
-			events[0],
-		);
-
 	const statsData: StatsData[] = [
 		{ type: "Universities", value: 21, icon: "GraduationCap" },
 		{ type: "Registrants", value: 3000, icon: "Users" },
 		{ type: "Streams", value: 10, icon: "LayoutTemplate" },
 		{ type: "Speakers", value: 16, icon: "MicVocal" },
 	];
+
 	return (
-		<div className="h-screen sm:h-[80vh] flex flex-col justify-center items-center gap-4 bg-transparent px-4 sm:px-8">
-			<h3 className="text-xl sm:text-2xl font-semibold text-white my-16 text-center">
-				<p>We have conducted StudPro for many Years. We ended</p>
-				<p className="mt-4 text-5xl font-bold">
-					{latestVersion.version} With Massive Numbers.
-				</p>
-			</h3>
-			<div className="flex flex-col sm:flex-row justify-center items-center gap-8 w-full max-w-6xl">
-				{statsData.map((stat, index) => (
-					<StatCard
-						key={index}
-						stat={stat}
-						cardStyle={index % 2 === 0 ? "bg-transparent" : "bg-white"}
-						textStyle={index % 2 === 0 ? "text-white" : "text-primary"}
-					/>
-				))}
+		<section className="relative overflow-hidden bg-[var(--ink)] text-white py-32 lg:py-40">
+			{/* Grain overlay */}
+			<div
+				className="pointer-events-none absolute inset-0 bg-grain opacity-[0.08] mix-blend-overlay"
+				aria-hidden="true"
+			/>
+
+			{/* Soft radial glow */}
+			<div
+				className="pointer-events-none absolute inset-0"
+				aria-hidden="true"
+				style={{
+					background:
+						"radial-gradient(60% 50% at 80% 20%, rgba(238,121,41,0.08) 0%, transparent 60%)",
+				}}
+			/>
+
+			<div className="relative max-w-[1200px] mx-auto px-6 lg:px-12">
+				<div className="flex flex-col gap-8">
+					<span className="eyebrow text-white/60">By the numbers</span>
+
+					<h2
+						className="font-display leading-[0.92] tracking-tight max-w-[18ch]"
+						style={{ fontSize: "clamp(3rem, 7vw, 6rem)" }}
+					>
+						Seven years.{" "}
+						<em className="font-serif-italic text-[var(--primary)]">
+							One mission.
+						</em>
+					</h2>
+
+					<p className="text-white/55 text-sm sm:text-base leading-[1.7] max-w-[52ch]">
+						Built on numbers — and the people behind them. Here&apos;s what
+						StudPro looks like across the country.
+					</p>
+				</div>
+
+				<div className="mt-16 lg:mt-20 grid grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-0">
+					{statsData.map((stat, index) => (
+						<StatCard
+							key={stat.type}
+							stat={stat}
+							index={index}
+							isFirstInRow={index === 0 || index === 2}
+						/>
+					))}
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 };

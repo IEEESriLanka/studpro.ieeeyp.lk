@@ -1,48 +1,119 @@
+"use client";
+
 import { StatsData } from "@/components/home/Stats";
-import { Card } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import * as Ri from "react-icons/ri";
-import * as Fa from "react-icons/fa";
-import * as Md from "react-icons/md";
-import * as Bs from "react-icons/bs";
-import { IconType } from "react-icons";
+import { useEffect, useRef, useState } from "react";
+import {
+	GraduationCap,
+	Users,
+	LayoutTemplate,
+	MicVocal,
+	type LucideIcon,
+} from "lucide-react";
 
 interface StatCardProps {
 	stat: StatsData;
-	cardStyle?: string;
-	textStyle?: string;
+	index: number;
+	isFirstInRow?: boolean;
 }
 
-export const StatCard = ({ stat, cardStyle, textStyle }: StatCardProps) => {
-	// Map from lucide icon names to react-icons
-	const iconMap: Record<string, IconType> = {
-		GraduationCap: Fa.FaGraduationCap,
-		Users: Fa.FaUsers,
-		LayoutTemplate: Ri.RiLayoutGridLine,
-		MicVocal: Fa.FaMicrophone,
-		Badge: Bs.BsAward, // Default fallback
-	};
+const iconMap: Record<string, LucideIcon> = {
+	GraduationCap,
+	Users,
+	LayoutTemplate,
+	MicVocal,
+};
+
+const formatValue = (value: number, current: number) => {
+	// If target is >= 1000, display as "3K" style once we cross the threshold
+	if (value >= 1000) {
+		const display = current / 1000;
+		// Show one decimal while counting, integer when done
+		if (current >= value) return `${Math.round(display)}K`;
+		return `${display.toFixed(1)}K`;
+	}
+	return `${Math.round(current)}`;
+};
+
+export const StatCard = ({ stat, index, isFirstInRow }: StatCardProps) => {
+	const [current, setCurrent] = useState(0);
+	const [visible, setVisible] = useState(false);
+	const ref = useRef<HTMLDivElement>(null);
+	const rafRef = useRef<number | null>(null);
+
+	const Icon = stat.icon ? iconMap[stat.icon] : null;
+
+	useEffect(() => {
+		const el = ref.current;
+		if (!el) return;
+		const io = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					setVisible(true);
+					io.disconnect();
+				}
+			},
+			{ threshold: 0.3 },
+		);
+		io.observe(el);
+		return () => io.disconnect();
+	}, []);
+
+	useEffect(() => {
+		if (!visible) return;
+		const duration = 1600;
+		const start = performance.now();
+		const startValue = 0;
+		const endValue = stat.value;
+
+		const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+
+		const tick = (now: number) => {
+			const elapsed = now - start;
+			const t = Math.min(elapsed / duration, 1);
+			const eased = easeOutQuart(t);
+			setCurrent(startValue + (endValue - startValue) * eased);
+			if (t < 1) {
+				rafRef.current = requestAnimationFrame(tick);
+			}
+		};
+		rafRef.current = requestAnimationFrame(tick);
+		return () => {
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+		};
+	}, [visible, stat.value]);
 
 	return (
-		<Card
-			className={cn(
-				"flex flex-row w-64 p-8 border-2 border-white shadow-2xl",
-				cardStyle,
-			)}
+		<div
+			ref={ref}
+			className={`relative flex flex-col ${
+				isFirstInRow ? "" : "md:border-l md:border-white/10 md:pl-6 lg:pl-8"
+			}`}
+			style={{ animationDelay: `${index * 80}ms` }}
 		>
-			<div className="flec items-center justify-center">
-				{stat.icon &&
-					(() => {
-						const Icon = iconMap[stat.icon] || Bs.BsAward;
-						return <Icon className={cn("w-12 h-12", textStyle)} />;
-					})()}
-			</div>
-			<div className="flex flex-col">
-				<h3 className={cn("text-2xl font-bold", textStyle)}>{stat.value}+</h3>
-				<p className={cn("text-md font-semibold uppercase", textStyle)}>
-					{stat.type}
-				</p>
-			</div>
-		</Card>
+			{Icon && (
+				<Icon
+					className="absolute right-0 top-0 w-5 h-5 text-white/15"
+					strokeWidth={1.25}
+					aria-hidden="true"
+				/>
+			)}
+
+			<h3
+				className="font-display leading-[0.85] tracking-tight text-white tabular-nums"
+				style={{
+					fontSize: "clamp(4rem, 10vw, 8rem)",
+					letterSpacing: "0.01em",
+				}}
+			>
+				{formatValue(stat.value, current)}
+				<span className="text-[var(--primary)]">+</span>
+			</h3>
+
+			<div className="mt-4 h-px w-8 bg-[var(--primary)]" />
+
+			<p className="mt-3 text-[10px] uppercase tracking-[0.32em] text-white/55 font-medium">
+				{stat.type}
+			</p>
+		</div>
 	);
 };

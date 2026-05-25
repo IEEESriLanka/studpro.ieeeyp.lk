@@ -73,12 +73,12 @@ export function EventTimeline({ events, selectedYear }: EventTimelineProps) {
 													{getEventIcon()}
 												</div>
 
-												<div className="ml-8 bg-gradient-to-r from-primary/10 to-secondary/10 p-4 rounded-lg">
-													<h3 className="text-2xl font-semibold text-black">
+												<div className="ml-8 border-l border-border bg-card p-5 rounded-md">
+													<h3 className="font-display text-2xl tracking-tight text-foreground">
 														{series.title}
 													</h3>
 													{series.description && (
-														<p className="text-gray-600 text-sm mt-1">
+														<p className="text-muted-foreground text-sm mt-1 leading-relaxed">
 															{series.description}
 														</p>
 													)}

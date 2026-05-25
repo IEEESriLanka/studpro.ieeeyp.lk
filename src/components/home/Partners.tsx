@@ -6,111 +6,145 @@ import {
 	getPartnerByPartnerRecord,
 } from "@/data/partners";
 import { PartnerCard } from "@/components/partners/PartnerCard";
+import { ArrowUpRight } from "lucide-react";
 
 export const Partners = () => {
-	const currentYear = new Date().getFullYear(); // Current year
+	const currentYear = new Date().getFullYear();
 
-	// Find partners from the current year
 	const currentYearGroup = partnersByYear.find(
 		(yearGroup) => yearGroup.year === currentYear,
 	);
 	const currentPartners = currentYearGroup?.partners || [];
-	// Define level priority for sorting
+
 	const levelOrder = {
 		Platinum: 1,
 		Gold: 2,
 		Silver: 3,
 		Bronze: 4,
+		Industry: 2.5,
+		Ecosystem: 3.5,
 		undefined: 5,
-	};
-	// Sort partners by level (Platinum first, then Gold, then Silver, then Bronze, then partners with no level)
+	} as const;
+
 	const sortedPartners = [...currentPartners].sort(
 		(a, b) =>
-			levelOrder[(a.partnerLevel as keyof typeof levelOrder) ?? "undefined"] -
-			levelOrder[(b.partnerLevel as keyof typeof levelOrder) ?? "undefined"],
+			(levelOrder[(a.partnerLevel as keyof typeof levelOrder) ?? "undefined"] ??
+				5) -
+			(levelOrder[(b.partnerLevel as keyof typeof levelOrder) ?? "undefined"] ??
+				5),
 	);
 
-	// Check if we have any partners
-	const hasPartners = sortedPartners.length > 0; // For backwards compatibility with the JSX
-	const partnersByLevel = {
-		Platinum: sortedPartners.filter((p) => p.partnerLevel === "Platinum"),
-		Gold: sortedPartners.filter((p) => p.partnerLevel === "Gold"),
-		Silver: sortedPartners.filter((p) => p.partnerLevel === "Silver"),
-		Bronze: sortedPartners.filter((p) => p.partnerLevel === "Bronze"),
-		Undefined: sortedPartners.filter((p) => p.partnerLevel === undefined),
-	};
+	const limitedPartners = sortedPartners.slice(0, 15);
+	const hasPartners = limitedPartners.length > 0;
 
-	// Limit to 12 partners total
-	const limitedPartners = [...sortedPartners].slice(0, 12);
+	// Build a deduped marquee list using partner companies from the current year
+	// (fall back to all partners if current year is empty).
+	const marqueeSourcePartners =
+		currentPartners.length > 0
+			? currentPartners
+			: partnersByYear.flatMap((y) => y.partners);
+
+	const marqueeNames = Array.from(
+		new Set(
+			marqueeSourcePartners
+				.map((p) => getPartnerByPartnerRecord(p)?.name)
+				.filter((n): n is string => Boolean(n)),
+		),
+	);
+
+	// Duplicate for seamless loop
+	const marqueeLoop = [...marqueeNames, ...marqueeNames];
+
 	return (
-		<div
+		<section
 			id="partners"
-			className="mt-20 min-h-screen py-12 md:py-24 flex flex-col justify-center items-center"
+			className="relative bg-background py-32 lg:py-40 border-t border-border overflow-hidden"
 		>
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
-				{" "}
-				<div className="text-center mb-8 md:mb-16">
-					<h2 className="text-2xl md:text-3xl lg:text-4xl uppercase font-bold text-secondary mb-4 md:mb-6">
-						Featured Partners
+			<div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+				<div className="flex flex-col gap-4">
+					<span className="eyebrow">Partners & sponsors</span>
+					<h2
+						className="font-display tracking-tight leading-[0.95] text-foreground"
+						style={{ fontSize: "clamp(2.75rem, 6vw, 5rem)" }}
+					>
+						In <em className="font-serif-italic text-[var(--primary)]">good</em>{" "}
+						company.
 					</h2>
-					<p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
-						StudPro proudly partners with industry leaders to provide students
-						with the best learning experience and career opportunities.
+					<p className="text-muted-foreground text-sm sm:text-base leading-[1.7] max-w-[52ch]">
+						The companies that walk with us — investing in the next generation
+						of Sri Lankan engineers.
 					</p>
-				</div>{" "}
-				{/* All Partners Grid - Sorted by Level */}
+				</div>
+			</div>
+
+			{/* Full-bleed marquee with edge-fade mask */}
+			{marqueeNames.length > 0 && (
+				<div
+					className="relative mt-16 lg:mt-20 overflow-hidden select-none"
+					aria-hidden="true"
+					style={{
+						maskImage:
+							"linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+						WebkitMaskImage:
+							"linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+					}}
+				>
+					<div className="flex w-max animate-marquee-x-slow whitespace-nowrap">
+						{marqueeLoop.map((name, i) => (
+							<span
+								key={`${name}-${i}`}
+								className="font-display text-foreground/[0.08] px-8 tracking-tight"
+								style={{
+									fontSize: "clamp(2.5rem, 6vw, 5rem)",
+									lineHeight: 1,
+								}}
+							>
+								{name}
+								<span className="text-[var(--primary)]/30 ml-8">/</span>
+							</span>
+						))}
+					</div>
+				</div>
+			)}
+
+			<div className="max-w-[1200px] mx-auto px-6 lg:px-12">
 				{hasPartners ? (
-					<div>
-						{" "}
-						<div className="px-4 lg:px-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-							{/* Limited to 12 partners including those with undefined levels */}
-							{limitedPartners.map((partner, index) => {
-								const company = getPartnerByPartnerRecord(partner);
-								const years = calculatePartnerYears(partner);
-								return (
-									<div key={`${partner.companyId}-${index}`} className="group">
-										<PartnerCard partner={company} years={years} />
-									</div>
-								);
-							})}
-						</div>
+					<div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px bg-border border border-border overflow-hidden">
+						{limitedPartners.map((partner, index) => {
+							const company = getPartnerByPartnerRecord(partner);
+							const years = calculatePartnerYears(partner);
+							return (
+								<PartnerCard
+									key={`${partner.companyId}-${index}`}
+									partner={company}
+									years={years}
+								/>
+							);
+						})}
 					</div>
 				) : (
-					<div className="text-center py-6 md:py-10">
-						<div className="text-secondary mb-4">
-							<svg
-								className="w-12 h-12 md:w-16 md:h-16 mx-auto"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={1.5}
-									d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-								/>
-							</svg>
-						</div>
-						<h3 className="text-lg font-medium text-black mb-2">
+					<div className="mt-16 py-16 text-center border border-border">
+						<h3 className="font-display text-2xl text-foreground mb-2">
 							No partners yet for {currentYear}
 						</h3>
-						<p className="text-gray-500">
-							Check back soon for our newest partners!
+						<p className="text-muted-foreground text-sm">
+							Check back soon for our newest partners.
 						</p>
 					</div>
 				)}
-				<div className="text-center mt-8 md:mt-16">
+
+				<div className="mt-12 flex items-center justify-between flex-wrap gap-4">
 					<Link href="/partners">
-						<Button
-							variant="default"
-							className="bg-primary hover:bg-primary/90 text-white"
-						>
-							View All Partners
+						<Button variant="outline" className="group">
+							View all partners
+							<ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
 						</Button>
 					</Link>
+					<span className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+						{currentYearGroup?.version ?? `StudPro · ${currentYear}`}
+					</span>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };

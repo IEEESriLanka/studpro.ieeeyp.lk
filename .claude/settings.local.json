@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path . -Recurse -Depth 2)",
+      "Bash(Select-Object -First 50)",
+      "Bash(npx skills *)"
+    ]
+  }
+}
