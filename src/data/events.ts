@@ -1061,16 +1061,28 @@ export const events: StudProVersion[] = [
 						venue: "WSO2 Sri Lanka, Colombo",
 					},
 				],
-			},
-		],
-	},
-	{
-		version: "StudPro 9.0",
-		year: 2026,
-		description:
-			"StudPro 9.0 is a future edition focused on emerging AI workflows, product thinking, and industry readiness for the next generation of students.",
-		eventSeries: [
-			{
+			}, {
+				title: " Young Protégé 2025",
+				description:
+					"A mentorship-based program that helps students and young professionals build career skills, gain industry insights, and grow their personal brand through real-world experience.",
+				events: [
+					{
+						title: " Young Protégé 2025",
+						date: "August 29, 2025",
+						time: "",
+						topic: "",
+						description:
+							"Young Protégé 2025, powered by StudPro, IEEE Young Professionals Sri Lanka (YPSL), IEEE Students, and IEEE Elevate, returns this year with an even broader scope, welcoming participants from various different backgrounds. The program is designed to support students and young professionals in building strong professional foundations through structured mentorship. Through personalized guidance from industry experts, participants will gain valuable career insights, enhance their professional profiles, and develop essential skills required for real-world success. The program combines mentorship, real-world assignments, research projects, and continuous feedback to help participants explore career paths, improve decision-making, and strengthen their personal brand.",
+						images: ["/images/events/9.0/young-protege-2025-1-1.jpg", "/images/events/9.0/young-protege-2025-1-2.jpg", "/images/events/9.0/young-protege-2025-1-3.jpg", "/images/events/9.0/young-protege-2025-1-4.jpg", "/images/events/9.0/young-protege-2025-1-5.jpg", "/images/events/9.0/young-protege-2025-1-6.jpg", "/images/events/9.0/young-protege-2025-1-7.jpg"],
+						speaker: {
+							name: "KickOff Session - IIT , Colombo ",
+							title: "",
+							company: "",
+						},
+						venue: "KickOff Session - IIT , Colombo ",
+					}
+				],
+			}, {
 				title: "Profile 2025 Phase",
 				description:
 					"ProFile 2025 is a career development program that equips students and job seekers with industry insights, skills, and networking opportunities.",
@@ -1093,6 +1105,15 @@ export const events: StudProVersion[] = [
 
 				],
 			},
+		],
+	},
+	{
+		version: "StudPro 9.0",
+		year: 2026,
+		description:
+			"StudPro 9.0 is a future edition focused on emerging AI workflows, product thinking, and industry readiness for the next generation of students.",
+		eventSeries: [
+
 			{
 				title: "Profile Career Day 2026",
 				description:
@@ -1115,28 +1136,7 @@ export const events: StudProVersion[] = [
 					}
 				],
 			},
-			{
-				title: " Young Protégé 2025",
-				description:
-					"A mentorship-based program that helps students and young professionals build career skills, gain industry insights, and grow their personal brand through real-world experience.",
-				events: [
-					{
-						title: " Young Protégé 2025",
-						date: "August 29, 2025",
-						time: "",
-						topic: "",
-						description:
-							"Young Protégé 2025, powered by StudPro, IEEE Young Professionals Sri Lanka (YPSL), IEEE Students, and IEEE Elevate, returns this year with an even broader scope, welcoming participants from various different backgrounds. The program is designed to support students and young professionals in building strong professional foundations through structured mentorship. Through personalized guidance from industry experts, participants will gain valuable career insights, enhance their professional profiles, and develop essential skills required for real-world success. The program combines mentorship, real-world assignments, research projects, and continuous feedback to help participants explore career paths, improve decision-making, and strengthen their personal brand.",
-						images: ["/images/events/9.0/young-protege-2025-1-1.jpg", "/images/events/9.0/young-protege-2025-1-2.jpg", "/images/events/9.0/young-protege-2025-1-3.jpg", "/images/events/9.0/young-protege-2025-1-4.jpg", "/images/events/9.0/young-protege-2025-1-5.jpg", "/images/events/9.0/young-protege-2025-1-6.jpg", "/images/events/9.0/young-protege-2025-1-7.jpg"],
-						speaker: {
-							name: "KickOff Session - IIT , Colombo ",
-							title: "",
-							company: "",
-						},
-						venue: "KickOff Session - IIT , Colombo ",
-					}
-				],
-			},
+
 		],
 	},
 ];
