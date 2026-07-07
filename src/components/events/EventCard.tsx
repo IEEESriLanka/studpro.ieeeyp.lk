@@ -1,13 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-} from "@/components/ui/carousel";
+// import { /* Carousel removed - show only first image */ } from "@/components/ui/carousel";
 import type { Event } from "@/data/events";
-import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
-import { useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BsCalendar } from "react-icons/bs";
 
@@ -18,10 +12,6 @@ interface EventCardProps {
 
 export function EventCard({ session, version }: EventCardProps) {
 	const router = useRouter();
-	const autoplayPlugin = useRef(
-		Autoplay({ delay: 4000, stopOnInteraction: false }),
-	);
-
 	// Get version from context if not provided directly
 	const getVersionSlug = () => {
 		if (version) {
@@ -43,35 +33,13 @@ export function EventCard({ session, version }: EventCardProps) {
 		>
 			{session.images && session.images.length > 0 && (
 				<div className="w-full h-[350px] relative overflow-hidden">
-					{session.images.length === 1 ? (
 						<Image
 							src={session.images[0]}
 							alt={session.title}
-							width={310}
-							height={310}
+							width={350}
+							height={200}
 							className="object-cover w-full h-full"
 						/>
-					) : (
-						<Carousel
-							opts={{ loop: true }}
-							plugins={[autoplayPlugin.current]}
-							className="h-full"
-						>
-							<CarouselContent className="h-full">
-								{session.images.map((image, index) => (
-									<CarouselItem key={index} className="h-full">
-										<Image
-											src={image}
-											alt={`${session.title} - image ${index + 1}`}
-											width={350}
-											height={200}
-											className="object-cover w-full h-full"
-										/>
-									</CarouselItem>
-								))}
-							</CarouselContent>
-						</Carousel>
-					)}
 				</div>
 			)}
 			<CardContent className="px-6">
