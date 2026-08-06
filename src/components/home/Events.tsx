@@ -103,7 +103,7 @@ export const Events = () => {
 											key={`mobile-latest-${idx}`}
 											className="flex justify-center"
 										>
-											<EventCard session={event} version={event.versionTitle} />
+											<EventCard session={event} />
 										</CarouselItem>
 									))}
 								</CarouselContent>
@@ -136,7 +136,7 @@ export const Events = () => {
 						<div className="hidden md:grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-8 justify-items-center">
 							{latestEvents.map((event, idx) => (
 								<div key={`latest-${idx}`}>
-									<EventCard session={event} version={event.versionTitle} />
+									<EventCard session={event} />
 								</div>
 							))}
 						</div>
