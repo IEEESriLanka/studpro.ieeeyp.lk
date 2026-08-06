@@ -13,6 +13,12 @@ export interface Event {
 	images: string[]; // array of paths or URLs to event images
 	speaker: Speaker;
 	topic?: string; // Adding topic as optional to maintain compatibility
+	/**
+	 * Category identifier for organizing events by type rather than by StudPro version.
+	 * Maps to an id in CATEGORY_CONFIGS (e.g. "career-fairs", "cv-clinics", "industry-visits").
+	 * Add new category IDs to CATEGORY_CONFIGS to make them available here.
+	 */
+	category: string;
 }
 
 export interface EventSeries {
@@ -28,6 +34,125 @@ export interface StudProVersion {
 	eventSeries: EventSeries[];
 }
 
+/**
+ * Defines a category group for organizing events on the /events page.
+ * To add a new category, add a new entry to CATEGORY_CONFIGS and assign
+ * the matching category id to relevant Event objects.
+ */
+export interface EventCategory {
+	/** Unique slug used as the category identifier, e.g. "career-fairs" */
+	id: string;
+	/** Human-readable label shown in tabs, e.g. "Career Fairs" */
+	label: string;
+	/** Short description displayed under the category heading */
+	description: string;
+}
+
+/**
+ * Master list of event categories displayed as tabs on the /events page.
+ * Extensible — add a new EventCategory object here and assign its id
+ * to the `category` field of any Event to include it.
+ * The order of entries determines tab order on the events page.
+ */
+export const CATEGORY_CONFIGS: EventCategory[] = [
+	{
+		id: "career-fairs",
+		label: "Career Fairs",
+		description:
+			"Career expos, job fairs, and recruitment events connecting students directly with employers.",
+	},
+	{
+		id: "cv-clinics",
+		label: "CV Clinics",
+		description:
+			"Workshops and sessions on CV writing, LinkedIn branding, interview preparation, and professional grooming.",
+	},
+	{
+		id: "industry-visits",
+		label: "Industry Visits",
+		description:
+			"Guided visits to leading technology companies, providing students with firsthand exposure to professional work environments, modern technologies, and industry best practices.",
+	},
+	{
+		id: "workshops",
+		label: "Workshops",
+		description:
+			"Hands-on technical and professional development sessions led by industry experts, designed to strengthen practical skills and encourage collaborative learning.",
+	},
+	{
+		id: "webinar",
+		label: "Webinars",
+		description:
+			"Interactive online sessions featuring industry professionals who share insights on emerging technologies, career development, and current trends in the tech industry.",
+	},
+];
+
+/**
+ * Enriched event interface that carries the StudPro version and series context
+ * alongside the event data. Used by the timeline and detail views to show
+ * which version/series an event belongs to alongside its category.
+ */
+export interface EventWithContext extends Event {
+	/** The StudPro version label, e.g. "StudPro 5.0" */
+	versionName: string;
+	/** The year of the StudPro version */
+	versionYear: number;
+	/** The event series title this event belongs to */
+	seriesTitle: string;
+}
+
+/**
+ * Flattens all events across every StudPro version and event series into a single
+ * array, attaching version and series context to each event. Events are sorted
+ * by year (descending) then by index within their series (preserving original order).
+ * Used by getEventsByCategory() to build category-filtered lists.
+ */
+export function getAllFlattenedEvents(): EventWithContext[] {
+	const result: EventWithContext[] = [];
+	for (const version of events) {
+		for (const series of version.eventSeries) {
+			for (const event of series.events) {
+				result.push({
+					...event,
+					versionName: version.version,
+					versionYear: version.year,
+					seriesTitle: series.title,
+				});
+			}
+		}
+	}
+	return result;
+}
+
+/**
+ * Returns all events belonging to the given category, flattened across all
+ * StudPro versions. Results are sorted by year (descending, most recent first)
+ * then by their original order within each version's series.
+ * Used by EventTimeline to render events for a single category tab.
+ */
+export function getEventsByCategory(categoryId: string): EventWithContext[] {
+	return getAllFlattenedEvents()
+		.filter((event) => event.category === categoryId)
+		.sort((a, b) => b.versionYear - a.versionYear);
+}
+
+/**
+ * Finds a single event by its category id and decoded title string.
+ * Returns the first match (with version/series context) or null if none found.
+ * Used by the individual event detail page at /events/[category]/[title].
+ */
+export function getEventByCategoryAndTitle(
+	categoryId: string,
+	title: string,
+): EventWithContext | null {
+	const flattened = getAllFlattenedEvents();
+	return (
+		flattened.find(
+			(event) => event.category === categoryId && event.title === title,
+		) || null
+	);
+}
+
 export const events: StudProVersion[] = [
 	{
 		version: "StudPro 5.0",
@@ -41,6 +166,7 @@ export const events: StudProVersion[] = [
 					"Craft your resume and upgrade your LinkedIn to the next level!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Upgrade Your LinkedIn to the Next Level",
 						date: "May 22, 2022",
 						time: "6.00 PM Onwards",
@@ -59,6 +185,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Create Your Job Winning CV - Session 1",
 						date: "May 29, 2022",
 						time: "5.00 PM Onwards",
@@ -75,6 +202,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Create Your Job Winning CV - Session 2",
 						date: "May 29, 2022",
 						time: "5.00 PM Onwards",
@@ -100,6 +228,7 @@ export const events: StudProVersion[] = [
 					"directly from industry Experts!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Telecommunications and Electronics Stream",
 						date: "June 19, 2022",
 						time: "5.00 PM - 6.00 PM",
@@ -117,6 +246,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Telecommunications and Electronics Stream",
 						date: "June 19, 2022",
 						time: "5.00 PM - 6.00 PM",
@@ -133,6 +263,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Electrical Stream",
 						date: "June 19, 2022",
 						time: "6.00 PM Onwards",
@@ -150,6 +281,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Computer Science Stream",
 						date: "June 26, 2022",
 						time: "5.00 PM - 6.00 PM",
@@ -173,6 +305,7 @@ export const events: StudProVersion[] = [
 					"Know nothing about the industry you will be stepping into? This is a session series exclusively for you!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Computing Session",
 						date: "July 09, 2022",
 						time: "5.30 PM Onwards",
@@ -190,6 +323,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Electrical Session",
 						date: "July 10, 2022",
 						time: "5.00 PM Onwards",
@@ -206,6 +340,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Telecommunications Session",
 						date: "July 10, 2022",
 						time: "5.30 PM Onwards",
@@ -222,6 +357,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Electronics Session",
 						date: "July 10, 2022",
 						time: "6.00 PM Onwards",
@@ -245,6 +381,7 @@ export const events: StudProVersion[] = [
 					"the IEEE Young Professionals Sri Lanka!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Workshop on Personal Grooming",
 						date: "September 15, 2022",
 						time: "6.00 PM Onwards",
@@ -261,6 +398,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Workshop on Personal Grooming",
 						date: "September 18, 2022",
 						time: "6.30 PM Onwards",
@@ -284,6 +422,7 @@ export const events: StudProVersion[] = [
 					"Unveil the true secret behind actually acing your interviews successfully with more tactics and more techniques.",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "General Interviews",
 						date: "October 01, 2022",
 						time: "4.00 PM - 5.00 PM",
@@ -304,6 +443,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Technical Interviews",
 						date: "October 02, 2022",
 						time: "6.00 PM - 6.30 PM",
@@ -320,6 +460,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Technical Interviews",
 						date: "October 02, 2022",
 						time: "6.30 PM - 7.00 PM",
@@ -346,6 +487,7 @@ export const events: StudProVersion[] = [
 					"Your Ethics session is here for the rescue!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Know Your Ethics",
 						date: "October 23, 2022",
 						time: "6.00 PM - 7.00 PM",
@@ -372,6 +514,7 @@ export const events: StudProVersion[] = [
 					"Your Ethics session is here for the rescue!",
 				events: [
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "October 25, 2022",
 						time: "11.00 AM Onwards",
@@ -390,6 +533,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "October 26, 2022",
 						time: "6.00 PM Onwards",
@@ -407,6 +551,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "October 27, 2022",
 						time: "6.00 PM Onwards",
@@ -426,6 +571,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "October 28, 2022",
 						time: "6.00 PM Onwards",
@@ -443,6 +589,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "October 30, 2022",
 						time: "4.00 PM Onwards",
@@ -461,6 +608,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Ask Me Anything",
 						date: "November 01, 2022",
 						time: "6.00 PM Onwards",
@@ -489,6 +637,7 @@ export const events: StudProVersion[] = [
 					"Learn the best practices for successful job hunting at our comprehensive workshop, A Better Way!",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "A Better Way",
 						date: "January 29, 2023",
 						time: "5.00 PM - 6.00 PM",
@@ -526,6 +675,7 @@ export const events: StudProVersion[] = [
 					"skills and knowledge to effectively brand themselves for career advancement.",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Personal Branding",
 						date: "May 18, 2023",
 						time: "6.00 PM Onwards",
@@ -544,6 +694,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Crafting Your LinkedIn Profile",
 						date: "May 20, 2023",
 						time: "6.00 PM Onwards",
@@ -561,6 +712,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Creating a Winning CV",
 						date: "May 27, 2023",
 						time: "6.00 PM Onwards",
@@ -586,6 +738,7 @@ export const events: StudProVersion[] = [
 					"Know Your Industry aimed to provide a comprehensive understanding of the Engineering and Computing domains in Sri Lanka.",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Know Your Industry",
 						date: "June 27, 2023",
 						time: "6 PM Onwards",
@@ -601,6 +754,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Know Your Industry",
 						date: "June 27, 2023",
 						time: "6.00 PM Onwards",
@@ -616,6 +770,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Know Your Industry",
 						date: "June 27, 2023",
 						time: "6.00 PM Onwards",
@@ -631,6 +786,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Know Your Industry",
 						date: "June 27, 2023",
 						time: "6.00 PM Onwards",
@@ -653,6 +809,7 @@ export const events: StudProVersion[] = [
 					"Career Pathways informs fresh graduates about the wide range of roles and responsibilities within the computing, electrical and electronic industries.",
 				events: [
 					{
+						category: "career-fairs",
 						title: "Computing Stream",
 						date: "July 27, 2023",
 						time: "7 PM Onwards",
@@ -669,6 +826,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Computing Stream",
 						date: "July 27, 2023",
 						time: "7.00 PM Onwards",
@@ -685,6 +843,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "career-fairs",
 						title: "Engineering Stream",
 						date: "July 27, 2023",
 						time: "7.00 PM Onwards",
@@ -709,6 +868,7 @@ export const events: StudProVersion[] = [
 					"showcasing your skills and experience.",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "Interview Mastery",
 						date: "August 30, 2023",
 						time: "7 PM Onwards",
@@ -727,6 +887,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Interview Mastery",
 						date: "August 30, 2023",
 						time: "7.00 PM Onwards",
@@ -761,6 +922,7 @@ export const events: StudProVersion[] = [
 					"insights, networking opportunities, and real-world exposure to bridge the gap between academia and the professional world.",
 				events: [
 					{
+						category: "industry-visits",
 						title: "IFS Champions Day",
 						date: "June 28, 2024",
 						time: "9.00 AM Onwards",
@@ -780,6 +942,7 @@ export const events: StudProVersion[] = [
 						venue: "IFS, Orion City",
 					},
 					{
+						category: "industry-visits",
 						title: "Dialog Axiata",
 						date: "July 29, 2024",
 						time: "10.00 AM Onwards",
@@ -798,6 +961,7 @@ export const events: StudProVersion[] = [
 						venue: "Dialog Axiata, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "SLT Mobitel",
 						date: "August 30, 2024",
 						time: "9.30 AM Onwards",
@@ -817,6 +981,7 @@ export const events: StudProVersion[] = [
 						venue: "Dialog Axiata, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Virtusa",
 						date: "October 08, 2024",
 						time: "9.30 AM Onwards",
@@ -836,6 +1001,7 @@ export const events: StudProVersion[] = [
 						venue: "Virtusa Sri Lanka, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Zone24x7",
 						date: "December 04, 2024",
 						time: "11.00 AM Onwards",
@@ -855,6 +1021,7 @@ export const events: StudProVersion[] = [
 						venue: "Zone24x7 Sri Lanka, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Calcey",
 						date: "December 06, 2024",
 						time: "10.00 AM Onwards",
@@ -874,6 +1041,7 @@ export const events: StudProVersion[] = [
 						venue: "Trace Expert City, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Codegen International",
 						date: "January 10, 2025",
 						time: "10.00 AM Onwards",
@@ -910,6 +1078,7 @@ export const events: StudProVersion[] = [
 					"today’s job market.",
 				events: [
 					{
+						category: "cv-clinics",
 						title: "LinkedIn Mastery",
 						date: "March 22, 2025",
 						time: "7.00 PM Onwards",
@@ -928,6 +1097,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "CV That Gets You Noticed",
 						date: "April 29, 2025",
 						time: "7.00 PM Onwards",
@@ -946,6 +1116,7 @@ export const events: StudProVersion[] = [
 						venue: "Live via Zoom",
 					},
 					{
+						category: "cv-clinics",
 						title: "Personal Branding For Career Growth",
 						date: "May 17, 2025",
 						time: "7.00 PM Onwards",
@@ -972,6 +1143,7 @@ export const events: StudProVersion[] = [
 					"insights, networking opportunities, and real-world exposure to bridge the gap between academia and the professional world.",
 				events: [
 					{
+						category: "industry-visits",
 						title: "Cambio Software",
 						date: "April 11, 2025",
 						time: "11.00 AM Onwards",
@@ -990,6 +1162,7 @@ export const events: StudProVersion[] = [
 						venue: "Cambio Sri Lanka, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Acentura Inc.",
 						date: "April 22, 2025",
 						time: "02.00 PM Onwards",
@@ -1007,6 +1180,7 @@ export const events: StudProVersion[] = [
 						venue: "Acentura Inc, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "IFS Sri Lanka",
 						date: "May 23, 2025",
 						time: "9.00 AM Onwards",
@@ -1024,6 +1198,7 @@ export const events: StudProVersion[] = [
 						venue: "IFS Sri Lanka, Orion City, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "Altrium Sri Lanka",
 						date: "May 28, 2025",
 						time: "02.00 PM Onwards",
@@ -1042,6 +1217,7 @@ export const events: StudProVersion[] = [
 						venue: "Altrium Sri Lanka, Colombo",
 					},
 					{
+						category: "industry-visits",
 						title: "WSO2 Sri Lanka",
 						date: "June 18, 2025",
 						time: "9.30 PM Onwards",
@@ -1067,6 +1243,7 @@ export const events: StudProVersion[] = [
 					"A mentorship-based program that helps students and young professionals build career skills, gain industry insights, and grow their personal brand through real-world experience.",
 				events: [
 					{
+						category: "career-fairs",
 						title: " Young Protégé 2025",
 						date: "August 29, 2025",
 						time: "",
@@ -1088,6 +1265,7 @@ export const events: StudProVersion[] = [
 					"ProFile 2025 is a career development program that equips students and job seekers with industry insights, skills, and networking opportunities.",
 				events: [
 					{
+						category: "career-fairs",
 						title: "Profile 2025 Phase 01",
 						date: "February 14, 2026",
 						time: "January 17,2026",
@@ -1120,6 +1298,7 @@ export const events: StudProVersion[] = [
 					"Profile Career Day connects undergraduates with top companies through interviews, CV reviews, and networking opportunities.",
 				events: [
 					{
+						category: "career-fairs",
 						title: "Profile Career Day",
 						date: "March 06, 2026",
 						time: "",
@@ -1140,3 +1319,4 @@ export const events: StudProVersion[] = [
 		],
 	},
 ];
+

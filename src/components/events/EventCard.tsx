@@ -7,32 +7,28 @@ import { BsCalendar } from "react-icons/bs";
 
 interface EventCardProps {
 	session: Event;
-	version?: string;
 }
 
-export function EventCard({ session, version }: EventCardProps) {
+export function EventCard({ session }: EventCardProps) {
 	const router = useRouter();
-	// Get version from context if not provided directly
-	const getVersionSlug = () => {
-		if (version) {
-			return version.replace(/\s+/g, "-");
-		}
-		return "unknown-version";
-	};
 
+	/**
+	 * Navigates to the event detail page using the event's category
+	 * and URL-encoded title. The category id is already a URL-safe slug
+	 * (e.g. "career-fairs", "cv-clinics", "industry-visits").
+	 */
 	const handleCardClick = () => {
-		const versionSlug = getVersionSlug();
 		const encodedTitle = encodeURIComponent(session.title);
-		router.push(`/events/${versionSlug}/${encodedTitle}`);
+		router.push(`/events/${session.category}/${encodedTitle}`);
 	};
 
 	return (
 		<Card
-			className="h-full w-[350px] transition-all duration-200 hover:shadow-lg hover:scale-[1.02] bg-white cursor-pointer overflow-hidden pt-0"
+			className="h-full w-full max-w-[350px] transition-all duration-200 hover:shadow-lg hover:scale-[1.02] bg-white cursor-pointer overflow-hidden pt-0 mx-auto"
 			onClick={handleCardClick}
 		>
 			{session.images && session.images.length > 0 && (
-				<div className="w-full h-[350px] relative overflow-hidden">
+				<div className="w-full aspect-[4/5] relative overflow-hidden">
 						<Image
 							src={session.images[0]}
 							alt={session.title}
