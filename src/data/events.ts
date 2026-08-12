@@ -53,7 +53,7 @@ export interface EventCategory {
  * Extensible — add a new EventCategory object here and assign its id
  * to the `category` field of any Event to include it.
  * The order of entries determines tab order on the events page.
- */
+ *///** */
 export const CATEGORY_CONFIGS: EventCategory[] = [
 	{
 		id: "career-fairs",
