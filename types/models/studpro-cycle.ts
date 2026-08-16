@@ -16,4 +16,4 @@ const StudproCycleSchema: Schema = new Schema({
   ocMembers: [{ type: Schema.Types.ObjectId, ref: 'OCMember' }]
 });
 
-export default mongoose.model<IStudproCycle>('StudproCycle', StudproCycleSchema);
+export default mongoose.models.StudproCycle || mongoose.model<IStudproCycle>('StudproCycle', StudproCycleSchema);

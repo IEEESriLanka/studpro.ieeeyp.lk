@@ -16,4 +16,4 @@ const SpeakerSchema: Schema = new Schema({
   partnerCompany: { type: Schema.Types.ObjectId, ref: 'PartnerCompany' }
 });
 
-export default mongoose.model<ISpeaker>('Speaker', SpeakerSchema);
+export default mongoose.models.Speaker || mongoose.model<ISpeaker>('Speaker', SpeakerSchema);

@@ -14,4 +14,4 @@ const EventSeriesSchema: Schema = new Schema({
   events: [{ type: Schema.Types.ObjectId, ref: 'Event' }]
 });
 
-export default mongoose.model<IEventSeries>('EventSeries', EventSeriesSchema);
+export default mongoose.models.EventSeries || mongoose.model<IEventSeries>('EventSeries', EventSeriesSchema);
