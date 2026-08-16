@@ -24,4 +24,4 @@ const EventSchema: Schema = new Schema({
   partnerCompanies: [{ type: Schema.Types.ObjectId, ref: 'PartnerCompany' }]
 });
 
-export default mongoose.model<IEvent>('Event', EventSchema);
+export default mongoose.models.Event || mongoose.model<IEvent>('Event', EventSchema);
