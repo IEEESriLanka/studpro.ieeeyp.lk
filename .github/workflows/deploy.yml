@@ -24,9 +24,6 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Link Vercel project
-        run: vercel link --yes --project=${{ secrets.VERCEL_PROJECT_ID }} --scope=ieee-sl --token=${{ secrets.VERCEL_TOKEN }}
-
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --scope=ieee-sl --token=${{ secrets.VERCEL_TOKEN }}
 
