@@ -3,7 +3,9 @@ name: Deploy to Vercel
 on:
   push:
     branches:
-      - main
+      - release/development
+
+  workflow_dispatch:
 
 jobs:
   deploy:
