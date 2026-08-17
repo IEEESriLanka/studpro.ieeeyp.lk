@@ -19,6 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Remove Vercel local config
+        run: rm -rf .vercel
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
