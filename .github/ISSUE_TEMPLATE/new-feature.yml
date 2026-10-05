@@ -1,0 +1,75 @@
+name: "💡 New Feature Request"
+description: Suggest new functionality and features for the product.
+title: "[Feature]: "
+labels: ["Type/NewFeature"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Please select the area the issue is related to
+      multiple: true
+      options:
+        - Public Website / Landing Page
+        - Events & Categories (/events)
+        - Partners & Companies (/partners)
+        - About Us & Team (/about-us)
+        - Admin Dashboard (UI/UX)
+        - Authentication & Authorization (Supabase Auth)
+        - Database & Schema (Supabase / Postgres / RLS)
+        - Media & Storage (Supabase Storage / UploadThing)
+        - Server Actions & Backend APIs
+        - CI/CD, Build & Deployment
+    validations:
+      required: true
+  - type: dropdown
+    id: aspect
+    attributes:
+      label: Please select the aspect the issue is related to
+      multiple: true
+      options:
+        - Aspect/UI (Frontend layouts, components, styling, animations)
+        - Aspect/Backend (Server Actions, API routes, data flow)
+        - Aspect/Database (Tables, migrations, RLS policies, seed scripts)
+        - Aspect/Auth (Supabase Auth, RBAC, route guards, middleware)
+        - Aspect/Storage (Image uploads, CDN, assets)
+        - Aspect/Configuration (Config files, settings, env vars, dependencies)
+        - Aspect/Performance (Latency, caching/ISR, Core Web Vitals)
+        - Aspect/UX (User flows, usability, responsive mobile layout)
+        - Aspect/Other (Anything else not covered above)
+    validations:
+      required: true
+  - type: textarea
+    id: suggested_feature
+    attributes:
+      label: Suggested Feature
+      description: Describe the feature you'd like, the problem it solves, and the user story.
+      placeholder: |
+        ### Feature Summary
+        What does this feature do?
+
+        ### Problem / Motivation
+        Why is this feature needed?
+
+        ### Proposed Solution & UX
+        How should this look and work?
+    validations:
+      required: true
+  - type: input
+    id: related_issues
+    attributes:
+      label: Related Issues
+      description: Link any related issues or pull requests (e.g. #12, #45).
+    validations:
+      required: false
+  - type: checkboxes
+    id: steps_to_verify
+    attributes:
+      label: Implementation & Verification Checklist
+      description: Check off each step as it is completed before marking this feature as done.
+      options:
+        - label: "**Architecture Alignment** — Requirements and database schema / security rules have been planned and reviewed."
+        - label: "**Implementation** — Feature implemented using Next.js App Router, Tailwind v4, and Supabase integration."
+        - label: "**Security & RLS Verified** — Protected routes and database Row-Level Security policies tested."
+        - label: "**Code Quality & Linting** — TypeScript compilation and Biome/ESLint checks pass with 0 errors."
+        - label: "**Testing & Visual QA** — Responsive layouts, interactions, and form mutations verified on mobile and desktop."
+        - label: "**Feature Complete** — Ready for merging into development branch."

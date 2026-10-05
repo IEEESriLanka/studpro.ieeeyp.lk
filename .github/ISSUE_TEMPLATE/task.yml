@@ -1,0 +1,61 @@
+name: "✍️ Create a Task"
+description: Create a new task.
+title: "[Task]: "
+labels: ["Type/Task"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Please select the area the issue is related to
+      multiple: true
+      options:
+        - Public Website / Landing Page
+        - Events & Categories (/events)
+        - Partners & Companies (/partners)
+        - About Us & Team (/about-us)
+        - Admin Dashboard (UI/UX)
+        - Authentication & Authorization (Supabase Auth)
+        - Database & Schema (Supabase / Postgres / RLS)
+        - Media & Storage (Supabase Storage / UploadThing)
+        - Server Actions & Backend APIs
+        - CI/CD, Build & Deployment
+    validations:
+      required: true
+  - type: dropdown
+    id: aspect
+    attributes:
+      label: Please select the aspect the issue is related to
+      multiple: true
+      options:
+        - Aspect/UI (Frontend layouts, components, styling, animations)
+        - Aspect/Backend (Server Actions, API routes, data flow)
+        - Aspect/Database (Tables, migrations, RLS policies, seed scripts)
+        - Aspect/Auth (Supabase Auth, RBAC, route guards, middleware)
+        - Aspect/Storage (Image uploads, CDN, assets)
+        - Aspect/Configuration (Config files, settings, env vars, dependencies)
+        - Aspect/Performance (Latency, caching/ISR, Core Web Vitals)
+        - Aspect/UX (User flows, usability, responsive mobile layout)
+        - Aspect/Other (Anything else not covered above)
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description & Deliverables
+      description: A clear description of what needs to be done and expected deliverables.
+      placeholder: |
+        ### Goal
+        What is the specific objective of this task?
+
+        ### Technical Deliverables
+        - [ ] Item 1
+        - [ ] Item 2
+    validations:
+      required: true
+  - type: input
+    id: related_issues
+    attributes:
+      label: Related Issues
+      description: Link any related issues or pull requests (e.g. #12, #45).
+    validations:
+      required: false

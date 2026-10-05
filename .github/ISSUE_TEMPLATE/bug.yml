@@ -1,0 +1,85 @@
+name: "🐞 Report a Bug"
+description: Create an issue if something does not work as expected.
+title: "[Bug]: "
+labels: ["Type/Bug"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Please select the area the issue is related to
+      multiple: true
+      options:
+        - Public Website / Landing Page
+        - Events & Categories (/events)
+        - Partners & Companies (/partners)
+        - About Us & Team (/about-us)
+        - Admin Dashboard (UI/UX)
+        - Authentication & Authorization (Supabase Auth)
+        - Database & Schema (Supabase / Postgres / RLS)
+        - Media & Storage (Supabase Storage / UploadThing)
+        - Server Actions & Backend APIs
+        - CI/CD, Build & Deployment
+    validations:
+      required: true
+  - type: dropdown
+    id: aspect
+    attributes:
+      label: Please select the aspect the issue is related to
+      multiple: true
+      options:
+        - Aspect/UI (Frontend layouts, components, styling, animations)
+        - Aspect/Backend (Server Actions, API routes, data flow)
+        - Aspect/Database (Tables, migrations, RLS policies, seed scripts)
+        - Aspect/Auth (Supabase Auth, RBAC, route guards, middleware)
+        - Aspect/Storage (Image uploads, CDN, assets)
+        - Aspect/Configuration (Config files, settings, env vars, dependencies)
+        - Aspect/Performance (Latency, caching/ISR, Core Web Vitals)
+        - Aspect/UX (User flows, usability, responsive mobile layout)
+        - Aspect/Other (Anything else not covered above)
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please share a clear and concise description of the problem.
+      placeholder: Describe the bug and what went wrong...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: List the steps followed when encountering the issue.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity Level of the Issue
+      description: Mark the severity of the issue
+      options:
+        - Severity/Blocker (Core functionality is broken, blocking release/testing)
+        - Severity/Critical (Major feature is broken, urgent attention needed)
+        - Severity/Major (Important functionality is degraded, prioritized for next milestone)
+        - Severity/Minor (Non-critical issue or minor visual glitch)
+        - Severity/Trivial (Cosmetic issue or typo)
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Mention the environment details (Browser, OS, Node/Next.js version, etc.)
+      placeholder: |
+        - OS: Windows / macOS / Linux
+        - Browser: Chrome / Firefox / Safari
+        - Node version: 20+
+    validations:
+      required: false

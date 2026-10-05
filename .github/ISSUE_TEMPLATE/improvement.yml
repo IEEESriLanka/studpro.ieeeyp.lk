@@ -1,0 +1,60 @@
+name: "🚀 Improvement Request"
+description: Suggest an improvement to the product.
+title: "[Improvement]: "
+labels: ["Type/Improvement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Please select the area the issue is related to
+      multiple: true
+      options:
+        - Public Website / Landing Page
+        - Events & Categories (/events)
+        - Partners & Companies (/partners)
+        - About Us & Team (/about-us)
+        - Admin Dashboard (UI/UX)
+        - Authentication & Authorization (Supabase Auth)
+        - Database & Schema (Supabase / Postgres / RLS)
+        - Media & Storage (Supabase Storage / UploadThing)
+        - Server Actions & Backend APIs
+        - CI/CD, Build & Deployment
+    validations:
+      required: true
+  - type: dropdown
+    id: aspect
+    attributes:
+      label: Please select the aspect the issue is related to
+      multiple: true
+      options:
+        - Aspect/UI (Frontend layouts, components, styling, animations)
+        - Aspect/Backend (Server Actions, API routes, data flow)
+        - Aspect/Database (Tables, migrations, RLS policies, seed scripts)
+        - Aspect/Auth (Supabase Auth, RBAC, route guards, middleware)
+        - Aspect/Storage (Image uploads, CDN, assets)
+        - Aspect/Configuration (Config files, settings, env vars, dependencies)
+        - Aspect/Performance (Latency, caching/ISR, Core Web Vitals)
+        - Aspect/UX (User flows, usability, responsive mobile layout)
+        - Aspect/Other (Anything else not covered above)
+    validations:
+      required: true
+  - type: textarea
+    id: suggested_improvement
+    attributes:
+      label: Suggested Improvement
+      description: Describe the current limitation and the specific improvement you suggest.
+      placeholder: |
+        ### Current State
+        Describe how it currently works...
+
+        ### Proposed Improvement
+        Describe what should be improved and why...
+    validations:
+      required: true
+  - type: input
+    id: related_issues
+    attributes:
+      label: Related Issues
+      description: Link any related issues or pull requests (e.g. #12, #45).
+    validations:
+      required: false
