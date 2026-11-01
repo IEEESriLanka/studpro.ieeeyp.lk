@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { BsCalendar } from "react-icons/bs";
 import { MapPin, Video, Globe, Users, Layers } from "lucide-react";
 import type { DeliveryMode } from "@/lib/constants/events";
+import { shouldBeUnoptimized } from "@/lib/utils/image";
 
 interface EventCardProps {
 	session: any;
@@ -40,7 +41,8 @@ export function EventCard({ session }: EventCardProps) {
 							width={350}
 							height={200}
 							className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-							unoptimized={firstImage.startsWith("http")}
+							sizes="(max-width: 768px) 100vw, 350px"
+							unoptimized={shouldBeUnoptimized(firstImage)}
 						/>
 						{/* Delivery badge overlay */}
 						<div className="absolute top-3 left-3 flex flex-col gap-1.5">

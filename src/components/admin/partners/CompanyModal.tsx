@@ -6,6 +6,7 @@ import { X, Loader2, Building2, UploadCloud, Globe, AlertCircle, Trash2 } from "
 import { UploadDropzone } from "@/utils/uploadthing";
 import { createCompany, updateCompany } from "@/app/actions/partners";
 import { Button } from "@/components/ui/button";
+import { compressImageFiles } from "@/lib/utils/image-compression";
 
 interface CompanyModalProps {
 	isOpen: boolean;
@@ -195,6 +196,18 @@ export function CompanyModal({
 								<div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/40 p-2 hover:border-slate-700 transition-colors">
 									<UploadDropzone
 										endpoint="singleImageUploader"
+										onBeforeUploadBegin={async (files) => {
+											try {
+												return await compressImageFiles(files, {
+													maxWidth: 800,
+													maxHeight: 800,
+													quality: 0.88,
+												});
+											} catch (err) {
+												console.warn("Client logo compression error:", err);
+												return files;
+											}
+										}}
 										onClientUploadComplete={(res) => {
 											if (res && res.length > 0) {
 												setLogoUrl(res[0].ufsUrl || res[0].url);
