@@ -99,7 +99,7 @@
 
 ### 2. Clone and Install Dependencies
 ```bash
-git clone https://github.com/Manusha-Sathsara/studpro.ieeeyp.lk.git
+git clone https://github.com/IEEESriLanka/studpro.ieeeyp.lk.git
 cd studpro.ieeeyp.lk
 npm install
 ```
