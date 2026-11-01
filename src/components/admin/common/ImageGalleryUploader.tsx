@@ -5,6 +5,8 @@ import Image from "next/image";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { Trash2, Plus, Image as ImageIcon, Link as LinkIcon, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { compressImageFiles } from "@/lib/utils/image-compression";
+import { shouldBeUnoptimized } from "@/lib/utils/image";
 
 interface ImageGalleryUploaderProps {
 	name?: string;
@@ -103,7 +105,7 @@ export function ImageGalleryUploader({
 								alt={`Preview ${index + 1}`}
 								fill
 								className="object-cover"
-								unoptimized={url.startsWith("http")}
+								unoptimized={shouldBeUnoptimized(url)}
 							/>
 							{/* Hover Overlay with Delete Button */}
 							<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -121,11 +123,23 @@ export function ImageGalleryUploader({
 				</div>
 			)}
 
-			{/* UploadDropzone (only show if under max images limit) */}
+			{/* UploadDropzone with Client-Side Auto-Compression */}
 			{images.length < maxImages && (
 				<div className="rounded-2xl border border-dashed border-slate-800 bg-slate-950/40 p-2 hover:border-slate-700 transition-colors">
 					<UploadDropzone
 						endpoint="imageUploader"
+						onBeforeUploadBegin={async (files) => {
+							try {
+								return await compressImageFiles(files, {
+									maxWidth: 1920,
+									maxHeight: 1920,
+									quality: 0.85,
+								});
+							} catch (err) {
+								console.warn("Client image compression error:", err);
+								return files;
+							}
+						}}
 						onClientUploadComplete={(res) => {
 							if (res && res.length > 0) {
 								const newUrls = res

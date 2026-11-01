@@ -6,6 +6,7 @@ import { CATEGORY_CONFIGS } from "@/data/events";
 import { Card } from "@/components/ui/card";
 import { BackButton } from "@/components/ui/back-button";
 import { SeriesMilestoneTimeline } from "@/components/events/SeriesMilestoneTimeline";
+import { EventImageGallery } from "@/components/events/EventImageGallery";
 import {
 	MapPin,
 	Video,
@@ -121,42 +122,13 @@ export default async function EventPage(props: {
 					/>
 				)}
 
-				{/* Event Hero Images */}
+				{/* Event Image Gallery & Carousel (Aspect Ratio Preserved & Optimized) */}
 				{found.images && found.images.length > 0 && (
-					<div className="mb-10">
-						<div className="relative w-full h-[320px] md:h-[480px] overflow-hidden rounded-3xl shadow-xl bg-slate-100 border border-slate-100">
-							<Image
-								src={found.images[0]}
-								alt={found.title}
-								width={1200}
-								height={600}
-								className="object-cover w-full h-full"
-								priority
-								unoptimized={found.images[0].startsWith("http")}
-							/>
-						</div>
-
-						{/* Additional photos gallery */}
-						{found.images.length > 1 && (
-							<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
-								{found.images.slice(1).map((image, idx) => (
-									<div
-										key={idx}
-										className="relative h-[130px] overflow-hidden rounded-2xl bg-slate-100 shadow border border-slate-200"
-									>
-										<Image
-											src={image}
-											alt={`${found.title} - photo ${idx + 2}`}
-											width={400}
-											height={300}
-											className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-											unoptimized={image.startsWith("http")}
-										/>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
+					<EventImageGallery
+						images={found.images}
+						title={found.title}
+						category={params.category}
+					/>
 				)}
 
 				{/* Main Content Layout */}

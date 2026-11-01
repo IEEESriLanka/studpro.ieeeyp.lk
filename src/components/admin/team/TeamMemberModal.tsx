@@ -18,6 +18,7 @@ import {
 import { UploadDropzone } from "@/utils/uploadthing";
 import { createTeamMember, updateTeamMember } from "@/app/actions/team";
 import { Button } from "@/components/ui/button";
+import { compressImageFiles } from "@/lib/utils/image-compression";
 import {
 	TEAM_ROLE_GROUPS,
 	ALL_PRESET_ROLES,
@@ -404,6 +405,18 @@ export function TeamMemberModal({
 									<div className="flex-1 w-full min-w-0">
 										<UploadDropzone
 											endpoint="singleImageUploader"
+											onBeforeUploadBegin={async (files) => {
+												try {
+													return await compressImageFiles(files, {
+														maxWidth: 1200,
+														maxHeight: 1200,
+														quality: 0.85,
+													});
+												} catch (err) {
+													console.warn("Client image compression error:", err);
+													return files;
+												}
+											}}
 											onClientUploadComplete={(res) => {
 												if (res && res.length > 0) {
 													setImageUrl(res[0].ufsUrl || res[0].url);
